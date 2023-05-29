@@ -27,8 +27,9 @@ if __name__ == "__main__":
             list_of_c_tasks.append(task["title"])
         else:
             not_completed += 1
-            total_tasks = completed + not_completed
+    total_tasks = completed + not_completed
 
-    print(f"Employee {e_name} is done with tasks({completed}/{total_tasks}):")
+    print("Employee {} is done with tasks({}/{}):"
+          .format(e_name, completed, total_tasks))
     for element in list_of_c_tasks:
         print(f"\t {element}")
