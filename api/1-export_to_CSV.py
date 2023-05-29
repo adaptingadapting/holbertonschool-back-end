@@ -17,7 +17,6 @@ if __name__ == "__main__":
     tasks_in = get(f"https://jsonplaceholder.typicode.com/todos?userId={e_id}"
                    ).json()
 
-    """
     completed = 0
     not_completed = 0
 
@@ -33,11 +32,11 @@ if __name__ == "__main__":
           .format(e_name, completed, total_tasks))
     for element in list_of_c_tasks:
         print(f"\t {element}")
-    """
+
     new_string = ""
     for task in tasks_in:
         new_string += f'"{e_id}",'
-        new_string += f'"{e_name}",'
+        new_string += f'"{user_info["username"]}",'
         new_string += f'"{task["completed"]}",'
         new_string += f'"{task["title"]}"\n'
 
