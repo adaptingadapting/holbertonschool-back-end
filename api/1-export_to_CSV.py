@@ -3,6 +3,7 @@
 Python script that, using this REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
+import csv
 from requests import get
 from sys import argv
 
@@ -19,6 +20,7 @@ if __name__ == "__main__":
 
     completed = 0
     not_completed = 0
+    list_of_c_tasks = []
 
     for task in tasks_in:
         if task["completed"] is True:
@@ -30,15 +32,14 @@ if __name__ == "__main__":
 
     print("Employee {} is done with tasks({}/{}):"
           .format(e_name, completed, total_tasks))
+
     for element in list_of_c_tasks:
         print(f"\t {element}")
 
-    new_string = ""
-    for task in tasks_in:
-        new_string += f'"{e_id}",'
-        new_string += f'"{user_info["username"]}",'
-        new_string += f'"{task["completed"]}",'
-        new_string += f'"{task["title"]}"\n'
+    # task 2
 
-    with open(f"{e_id}.csv", "w") as f:
-        f.write(new_string)
+    with open(f"{e_id}.csv", 'w') as f:
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+        for task in tasks_in:
+            writer.writerow([e_id, user_info['username'],
+                             task['completed'], task['title']])
